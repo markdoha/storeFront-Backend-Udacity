@@ -1,6 +1,6 @@
 # Storefront Backend Project
 
-## Prepare env
+## Prepare env and change the values
 ```
 ENV=dev
 
@@ -24,29 +24,7 @@ TOKEN=mark123!
 - `npm run build` to build the app
 
 ## Start the app
-- `npm run start` to start the app and get access via http://127.0.0.1:3000
-
+- `npm run start` to start the app
 
 ## Test the app
-- add a `database.json` file in the root directory and set the missing `###` parameters
-```
-{
-  "dev": {
-    "driver": "pg",
-    "host": "127.0.0.1",
-    "port": 5432,
-    "database": "storefront",
-    "user": "###",
-    "password": "###"
-  },
-  "test": {
-    "driver": "pg",
-    "host": "127.0.0.1",
-    "port": 5433,
-    "database": "storefront",
-    "user": "###",
-    "password": "###"
-  }
-}
-```
-- `npm run test` to run all tests
+- `npm run test` to test the app
