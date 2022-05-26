@@ -1,0 +1,24 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 4000,
+            "driver": "PostgreSQL",
+            "name": "a7a",
+            "database": "shopping",
+            "username": "shopping_user",
+            "password": "password123"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 4000,
+            "driver": "PostgreSQL",
+            "name": "a7a2",
+            "database": "shopping_test",
+            "password": "password123",
+            "username": "shopping_user"
+        }
+    ]
+}

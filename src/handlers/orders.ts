@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import dotenv from "dotenv";
 import jwt, { Secret } from "jsonwebtoken";
 import { orderInfo , order, orderProduct} from '../models/order';
-import { auth } from '../middelWares/auth';
+import { auth } from '../middlewares/auth';
 
 
 dotenv.config();

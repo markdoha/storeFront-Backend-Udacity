@@ -3,7 +3,7 @@
       "driver": "pg",
       "host": {"ENV": "db_host"},
       "database": {"ENV": "db_name"},
-      "port": 4000,
+      "port": {"ENV": "port"},
       "user": {"ENV": "db_user"},
       "password": {"ENV": "db_password"}
     },
@@ -11,7 +11,7 @@
       "driver": "pg",
       "host": {"ENV": "db_host"},
       "database": {"ENV": "db_test"},
-      "port": 4000,
+      "port": {"ENV": "port"},
       "user": {"ENV": "db_user"},
       "password": {"ENV": "db_password"}
     }

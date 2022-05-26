@@ -33,8 +33,6 @@ export class UserInfo{
     }
 
 
-
-    
     async create(u: user): Promise<user>{
         try{
             const conn = await db_info.connect();
@@ -43,10 +41,9 @@ export class UserInfo{
             const result = await conn.query(sql, [u.FirstName, u.LastName, hash]);
             conn.release();
             console.log(result.rows[0]);
-            
             return result.rows[0];
         } catch (err){
-            throw new Error(`cannot get cat: ${err}`)
+            throw new Error(`cannot create user: ${err}`)
             
         }
     }

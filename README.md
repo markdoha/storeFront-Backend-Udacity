@@ -23,8 +23,16 @@ TOKEN=mark123!
 - `npm run db:up` to set up the database and get access via
 - `npm run build` to build the app
 
+
+## app ports
+- database port `5432`
+
+- app port `3000`
+
 ## Start the app
 - `npm run start` to start the app
 
 ## Test the app
 - `npm run test` to test the app
+
+

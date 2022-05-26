@@ -4,7 +4,7 @@ import dotenv from "dotenv";
 import jwt, { Secret } from "jsonwebtoken";
 import { UserInfo, user } from '../models/user';
 import { NextFunction } from "migrate";
-import { auth } from '../middelWares/auth';
+import { auth } from '../middlewares/auth';
 
 dotenv.config();
 
@@ -22,7 +22,7 @@ let app = express.Router();
 
 
     
-    app.post("/create_user",auth, async (req: Request,res: Response)=>{
+    app.post("/create_user", async (req: Request,res: Response)=>{
         const AddUser: user = {
             FirstName: req.body.FirstName,
             LastName: req.body.LastName,

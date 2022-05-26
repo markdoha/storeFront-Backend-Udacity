@@ -1,4 +1,4 @@
-import pool, { Pool } from "pg";
+import { Pool } from "pg";
 import dotenv from "dotenv";
 
 dotenv.config();
@@ -12,8 +12,8 @@ if(ENV === "dev"){
     data = {
         host: db_host,
         database: db_name,
+        port: 5432,
         user: db_user,
-        port: 4000,
         password: db_password,
     };
 }
@@ -22,8 +22,8 @@ if(ENV === "test"){
     data = {
         host: db_host,
         database: db_test,
+        port: 5432,
         user: db_user,
-        port: 4000,
         password: db_password,
     };
 }

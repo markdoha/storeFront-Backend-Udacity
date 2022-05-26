@@ -6,7 +6,13 @@ const o = new orderInfo();
 const p = new ProductsInfo();
 const u = new UserInfo();
 
-describe("Order tests", ()=>{
+const mark: user = {
+  FirstName: "mark",
+  LastName: "mamdouh",
+  password: "1234"
+}
+
+describe("define Order tests", ()=>{
     it("should have an index method", () => {
         expect(o.Index).toBeDefined();
       });
@@ -32,7 +38,7 @@ describe("Order tests", ()=>{
 
 
 
-describe("products tests", ()=>{
+describe("define products tests", ()=>{
     it("should have an index method", () => {
         expect(p.Index).toBeDefined();
       });
@@ -49,11 +55,10 @@ describe("products tests", ()=>{
 
 
 
-describe("user tests", ()=>{
+describe("define user tests", ()=>{
     it("should have an index method", () => {
         expect(u.Index).toBeDefined();
       });
-
 
       it("should find user", () => {
         expect(u.check).toBeDefined();
@@ -66,4 +71,31 @@ describe("user tests", ()=>{
       it("should show user", () => {
         expect(u.show).toBeDefined();
       });
+})
+
+
+describe("user tests", ()=>{
+
+  it("should create user", async() => {
+    const createMark = await u.create(mark);
+    let markId = createMark.id;
+    delete createMark.id
+    // expect(createMark).toEqual(mark);
+    expect(createMark.FirstName).toEqual(mark.FirstName);
+    // expect(createMark.LastName).toEqual("mamdouh");
+  });
+
+
+  it("should have an index method", () => {
+      expect(u.Index).toBeDefined();
+    });
+
+    it("should find user", () => {
+      expect(u.check).toBeDefined();
+    });
+
+
+    it("should show user", () => {
+      expect(u.show).toBeDefined();
+    });
 })
