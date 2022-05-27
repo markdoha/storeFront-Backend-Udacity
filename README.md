@@ -16,6 +16,9 @@ SAULT_SHOTS=10
 
 TOKEN=mark123!
 ```
+## Set up
+- create user with name `shoping_user` and grant him all access
+
 
 ## Set up
 
