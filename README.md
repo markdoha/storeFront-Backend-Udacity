@@ -16,8 +16,8 @@ SAULT_SHOTS=10
 
 TOKEN=mark123!
 ```
-## Set up
-- create user with name `shoping_user` and grant him all access
+## database
+- create user with name `shopping_user` with password `password123` and grant him all access
 
 
 ## Set up
