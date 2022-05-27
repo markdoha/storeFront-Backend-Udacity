@@ -39,7 +39,7 @@
     "db:up": "db-migrate up",
     "db:down": "db-migrate down",
     "test": "npm run build && set ENV=test && db-migrate --env test up && jasmine && db-migrate --env test reset",
-    "jasmine": "jasmine-"
+    "jasmine": "jasmine"
   },
   "keywords": [],
   "author": "",

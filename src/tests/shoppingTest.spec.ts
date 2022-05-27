@@ -78,10 +78,9 @@ describe("user tests", ()=>{
 
   it("should create user", async() => {
     const createMark = await u.create(mark);
-    let markId = createMark.id;
-    delete createMark.id
+    const { FirstName, LastName, password} = createMark
     // expect(createMark).toEqual(mark);
-    expect(createMark.FirstName).toEqual(mark.FirstName);
+    expect(FirstName).toBe(mark.FirstName)
     // expect(createMark.LastName).toEqual("mamdouh");
   });
 

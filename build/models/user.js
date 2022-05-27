@@ -75,7 +75,7 @@ var UserInfo = /** @class */ (function () {
     };
     UserInfo.prototype.create = function (u) {
         return __awaiter(this, void 0, void 0, function () {
-            var conn, sql, hash_1, result, err_2;
+            var conn, sql, hash_1, rows, err_2;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -87,10 +87,10 @@ var UserInfo = /** @class */ (function () {
                         hash_1 = bcrypt_1.default.hashSync(u.password + peaper, 10);
                         return [4 /*yield*/, conn.query(sql, [u.FirstName, u.LastName, hash_1])];
                     case 2:
-                        result = _a.sent();
+                        rows = (_a.sent()).rows;
                         conn.release();
-                        console.log(result.rows[0]);
-                        return [2 /*return*/, result.rows[0]];
+                        console.log(rows[0]);
+                        return [2 /*return*/, rows[0]];
                     case 3:
                         err_2 = _a.sent();
                         throw new Error("cannot create user: ".concat(err_2));

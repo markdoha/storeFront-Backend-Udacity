@@ -19,6 +19,16 @@
             "database": "shopping_test",
             "password": "password123",
             "username": "shopping_user"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "ss",
+            "database": "shopping_test",
+            "username": "shopping_user",
+            "password": "password123"
         }
     ]
 }

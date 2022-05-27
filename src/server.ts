@@ -3,7 +3,7 @@ import bodyParser from "body-parser";
 import cors from 'cors';
 import catRoute from "./handlers/user.routes";
 import productRoute from "./handlers/products.routes"
-import orderRoute from "./handlers/orders"
+import orderRoute from "./handlers/orders.routes"
 
 const port: number = 3000;
 

@@ -91,16 +91,15 @@ describe("define user tests", function () {
 });
 describe("user tests", function () {
     it("should create user", function () { return __awaiter(void 0, void 0, void 0, function () {
-        var createMark, markId;
+        var createMark, FirstName, LastName, password;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0: return [4 /*yield*/, u.create(mark)];
                 case 1:
                     createMark = _a.sent();
-                    markId = createMark.id;
-                    delete createMark.id;
+                    FirstName = createMark.FirstName, LastName = createMark.LastName, password = createMark.password;
                     // expect(createMark).toEqual(mark);
-                    expect(createMark.FirstName).toEqual(mark.FirstName);
+                    expect(FirstName).toBe(mark.FirstName);
                     return [2 /*return*/];
             }
         });

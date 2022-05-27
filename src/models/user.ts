@@ -38,10 +38,10 @@ export class UserInfo{
             const conn = await db_info.connect();
             const sql = "INSERT INTO users(FirstName, LastName, password) VALUES($1, $2, $3) RETURNING * ";
             const hash = bcrypt.hashSync(u.password + peaper , 10)
-            const result = await conn.query(sql, [u.FirstName, u.LastName, hash]);
+            const {rows} = await conn.query(sql, [u.FirstName, u.LastName, hash]);
             conn.release();
-            console.log(result.rows[0]);
-            return result.rows[0];
+            console.log(rows[0]);
+            return rows[0];
         } catch (err){
             throw new Error(`cannot create user: ${err}`)
             
