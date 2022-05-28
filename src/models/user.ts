@@ -9,11 +9,12 @@ const peaper = process.env.BCRYPT_PASSWORD;
 const SaultShots = process.env.SAULT_SHOTS;
 
 export type user = {
-    id?: string;
-    FirstName: string;
-    LastName: string;
+    id?: number;
+    firstname: string;
+    lastname: string;
     password: string;
 }
+
 
 export class UserInfo{
 
@@ -38,7 +39,7 @@ export class UserInfo{
             const conn = await db_info.connect();
             const sql = "INSERT INTO users(FirstName, LastName, password) VALUES($1, $2, $3) RETURNING * ";
             const hash = bcrypt.hashSync(u.password + peaper , 10)
-            const {rows} = await conn.query(sql, [u.FirstName, u.LastName, hash]);
+            const {rows} = await conn.query(sql, [u.firstname, u.lastname, hash]);
             conn.release();
             console.log(rows[0]);
             return rows[0];
@@ -50,7 +51,7 @@ export class UserInfo{
 
 
 
-    async show(id: string) : Promise<user | null>{
+    async show(id: number) : Promise<user | null>{
         try{
             const conn = await db_info.connect();
             const sql = "Select * from users where id = $1 ";
@@ -74,9 +75,8 @@ export class UserInfo{
         try{
             const conn = await db_info.connect();
             const sql = "SELECT * FROM users WHERE FirstName = $1 ";
-            const result = await conn.query(sql, [u.FirstName]);
+            const result = await conn.query(sql, [u.firstname]);
             conn.release();
-            console.log(result.rows[0]);
             
             if(result.rows.length){
                 const wot: user = result.rows[0];

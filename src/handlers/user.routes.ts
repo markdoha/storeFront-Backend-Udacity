@@ -11,12 +11,12 @@ dotenv.config();
 
 
 
-const user = new UserInfo();
+const u = new UserInfo();
 let app = express.Router();
 
     
     app.get("/users", auth, async (req: Request,res: Response)=>{
-        let data = await user.Index();
+        let data = await u.Index();
         res.json({users: data});
     });
 
@@ -24,11 +24,11 @@ let app = express.Router();
     
     app.post("/create_user", async (req: Request,res: Response)=>{
         const AddUser: user = {
-            FirstName: req.body.FirstName,
-            LastName: req.body.LastName,
+            firstname: req.body.firstname,
+            lastname: req.body.lastname,
             password: req.body.password
         }
-        let newUser = await user.create(AddUser)
+        let newUser = await u.create(AddUser)
         let token = jwt.sign({user: newUser}, process.env.TOKEN as string)
         res.json(token);
     })
@@ -38,8 +38,8 @@ let app = express.Router();
 
     
     app.get("/show_user/:id",auth, async (req: Request,res: Response)=>{
-        const id = req.params.id;
-        let TheUser = await user.show(id)
+        const id = req.params.id as unknown as number;
+        let TheUser = await u.show(id)
         if(TheUser != null){
             let token = jwt.sign({user: TheUser}, process.env.TOKEN as string)
             res.json({TOKEN: token})

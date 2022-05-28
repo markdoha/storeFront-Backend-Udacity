@@ -3,6 +3,7 @@ import bcrypt, { hash } from "bcrypt";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
 import { NumberLiteralType } from "typescript";
+import e from "express";
 
 dotenv.config();
 
@@ -12,14 +13,11 @@ const SaultShots = process.env.SAULT_SHOTS;
 
 export interface order {
     id?: number;
-    user_id: string;
+    user_id: number;
     status: boolean;
 };
 
-export interface orderProduct {
-    product_id: number;
-    quantity: number;
-};
+
 
 
 
@@ -54,15 +52,25 @@ export class orderInfo{
             
         }
     }
-    async addProduct(productId:number , orderId: number , quantaty: number): Promise<order>{
+    async addProduct(productId:number , orderId: number , quantaty: number): Promise<order| null>{
+        
         try{
             const conn = await db_info.connect();
-            const sql = "INSERT INTO order_products(order_id, product_id, quantity) VALUES ($1, $2, $3) RETURNING * "
-            let result = await conn.query(sql,[orderId, productId,quantaty]);
-            return result.rows[0];
+            const sql2 = "Select * from products where id = $1 ";
+            const result2 = await conn.query(sql2, [productId]);
+            let ans =result2.rows[0];
+            if(ans){
+                const sql = "INSERT INTO order_products(order_id, product_id, quantity) VALUES ($1, $2, $3) RETURNING * "
+                let result = await conn.query(sql,[orderId, productId,quantaty]);
+                return result.rows[0]; 
+            }
+            else{
+                return null
+            }
         } catch (err){
             throw new Error( `cannot add product: ${err}`)
         }
+        
     }
 
     async getOrderByUserId(userId: number): Promise<order> {

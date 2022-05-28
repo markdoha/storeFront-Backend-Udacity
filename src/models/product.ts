@@ -10,7 +10,7 @@ const SaultShots = process.env.SAULT_SHOTS;
 
 
 export type Product = {
-    id?: string;
+    id?: number;
     name: string;
     price: number;
 };
@@ -41,11 +41,11 @@ export class ProductsInfo{
         try{
             const conn = await db_info.connect();
             const sql = "INSERT INTO products(name, price) VALUES($1, $2) RETURNING * ";
-            const result = await conn.query(sql, [p.name, p.price]);
+            const {rows} = await conn.query(sql, [p.name, p.price]);
             conn.release();
-            console.log(result.rows[0]);
+            console.log(rows[0]);
             
-            return result.rows[0];
+            return rows[0];
         } catch (err){
             throw new Error(`cannot create product: ${err}`)
             
@@ -53,7 +53,7 @@ export class ProductsInfo{
     }
 
 
-    async show(id: string) : Promise<Product | null>{
+    async show(id: number) : Promise<Product | null>{
         try{
             const conn = await db_info.connect();
             const sql = "Select * from products where id = $1 ";

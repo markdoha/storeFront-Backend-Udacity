@@ -21,10 +21,12 @@
     "@types/jsonwebtoken": "^8.5.8",
     "@types/morgan": "^1.9.3",
     "@types/pg": "^8.6.5",
+    "@types/supertest": "^2.0.12",
     "jasmine": "^4.1.0",
     "jasmine-spec-reporter": "^7.0.0",
     "jasmine-ts": "^0.4.0",
     "nodemon": "^2.0.16",
+    "supertest": "^6.2.3",
     "ts-node": "^10.7.0",
     "tsc-watch": "^5.0.3"
   },
@@ -38,7 +40,7 @@
     "build": "npx tsc",
     "db:up": "db-migrate up",
     "db:down": "db-migrate down",
-    "test": "npm run build && set ENV=test && db-migrate --env test up && jasmine && db-migrate --env test reset",
+    "test": "npm run build && set ENV=test&& db-migrate --env test up && jasmine && db-migrate --env test reset",
     "jasmine": "jasmine"
   },
   "keywords": [],

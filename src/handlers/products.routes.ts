@@ -34,7 +34,7 @@ app.post("/create_product",auth, async (req: Request,res: Response)=>{
 app.get("/show_product/:id", async (req: Request,res: Response)=>{
     const id = req.params.id;
     try{
-        let Product  = await p.show(id)
+        let Product  = await p.show(id as unknown as number);
         res.json({Product: Product})
     } catch(err){
 

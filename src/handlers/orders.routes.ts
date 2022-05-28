@@ -2,7 +2,7 @@ import express from "express";
 import { Request, Response } from "express";
 import dotenv from "dotenv";
 import jwt, { Secret } from "jsonwebtoken";
-import { orderInfo , order, orderProduct} from '../models/order';
+import { orderInfo , order} from '../models/order';
 import { auth } from '../middlewares/auth';
 
 
@@ -38,7 +38,7 @@ app.post("/current_order/:id",auth , async (req: Request,res: Response)=>{
 
 app.post("/addProcuct/:id",auth , async (req: Request,res: Response)=>{
     const id = req.params.id as unknown as number;
-    const addProduct: orderProduct = {
+    const addProduct = {
         product_id: req.body.productId,
         quantity: req.body.quantity 
     }
