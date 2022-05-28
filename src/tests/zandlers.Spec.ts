@@ -20,15 +20,15 @@ describe("User Handler", () => {
     }
     let token :string;
     it("create a user", async () => {
-       await request.post("/create_user").send(userdata).then((res) => {
-            const {body, status} = res
-            token = body
-      
-            // @ts-ignore
-            const {user} = jwt.verify(token, SECRET)
+       await request.post("/create_user").send(
+           {
+                firstname: userdata.firstname,
+                lastname: userdata.lastname,
+                password: userdata.password
+           }
+       ).then((res) => {
             
-      
-            expect(status).toBe(200)
+            expect(res.status).toBe(200)
             
         })
 
@@ -52,7 +52,7 @@ describe("User Handler", () => {
 
 describe("Products Handler", () => {
     it("create a product", async () => {
-        request.post("/create_product").send({
+        request2.post("/create_product").send({
             name: "test",
             price: 123
         }).then((res) => {
@@ -62,14 +62,49 @@ describe("Products Handler", () => {
     })
 
     it("show a product", async () => {
-        request.get("/show_product/1").then((res) => {
+        request2.get("/show_product/1").then((res) => {
             expect(res.status).toBe(200);
         })
     })
 
     it("show all products", async () => {
-        request.get("/products").then((res) => {
+        request2.get("/products").then((res) => {
             expect(res.status).toBe(200);
+        })
+    })
+
+})
+
+
+describe("orders Handler", () => {
+    it("create order", async () => {
+        request3.post("/create_order").send({
+            user_id: 1,
+            status: true
+        }).then((res) => {
+        expect(res.status).toBe(200);
+        })
+
+    })
+
+    it("shows current order", async () => {
+        request3.get("/current_order/1").then((res) => {
+            expect(res.status).toBe(200);
+        })
+    })
+
+    it("show all orders", async () => {
+        request3.get("/orders").then((res) => {
+            expect(res.status).toBe(200);
+        })
+    })
+
+    it("add product", async () => {
+        request3.post("/addProcuct/1").send({
+            product_id: 1,
+            quantity: 2
+        }).then((res) => {
+        expect(res.status).toBe(200);
         })
     })
 

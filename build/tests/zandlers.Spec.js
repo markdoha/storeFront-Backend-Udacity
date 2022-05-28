@@ -40,7 +40,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var supertest_1 = __importDefault(require("supertest"));
-var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 var user_routes_1 = __importDefault(require("../handlers/user.routes"));
 var products_routes_1 = __importDefault(require("../handlers/products.routes"));
 var orders_routes_1 = __importDefault(require("../handlers/orders.routes"));
@@ -58,13 +57,12 @@ describe("User Handler", function () {
     it("create a user", function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, request.post("/create_user").send(userdata).then(function (res) {
-                        var body = res.body, status = res.status;
-                        token = body;
-                        // @ts-ignore
-                        var user = jsonwebtoken_1.default.verify(token, SECRET).user;
-                        expect(status).toBe(200);
-                        done();
+                case 0: return [4 /*yield*/, request.post("/create_user").send({
+                        firstname: userdata.firstname,
+                        lastname: userdata.lastname,
+                        password: userdata.password
+                    }).then(function (res) {
+                        expect(res.status).toBe(200);
                     })];
                 case 1:
                     _a.sent();
@@ -92,7 +90,7 @@ describe("User Handler", function () {
 describe("Products Handler", function () {
     it("create a product", function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            request.post("/create_product").send({
+            request2.post("/create_product").send({
                 name: "test",
                 price: 123
             }).then(function (res) {
@@ -103,7 +101,7 @@ describe("Products Handler", function () {
     }); });
     it("show a product", function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            request.get("/show_product/1").then(function (res) {
+            request2.get("/show_product/1").then(function (res) {
                 expect(res.status).toBe(200);
             });
             return [2 /*return*/];
@@ -111,13 +109,50 @@ describe("Products Handler", function () {
     }); });
     it("show all products", function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            request.get("/products").then(function (res) {
+            request2.get("/products").then(function (res) {
                 expect(res.status).toBe(200);
             });
             return [2 /*return*/];
         });
     }); });
 });
-function done() {
-    throw new Error("Function not implemented.");
-}
+describe("orders Handler", function () {
+    it("create order", function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            request3.post("/create_order").send({
+                user_id: 1,
+                status: true
+            }).then(function (res) {
+                expect(res.status).toBe(200);
+            });
+            return [2 /*return*/];
+        });
+    }); });
+    it("shows current order", function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            request3.get("/current_order/1").then(function (res) {
+                expect(res.status).toBe(200);
+            });
+            return [2 /*return*/];
+        });
+    }); });
+    it("show all orders", function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            request3.get("/orders").then(function (res) {
+                expect(res.status).toBe(200);
+            });
+            return [2 /*return*/];
+        });
+    }); });
+    it("add product", function () { return __awaiter(void 0, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            request3.post("/addProcuct/1").send({
+                product_id: 1,
+                quantity: 2
+            }).then(function (res) {
+                expect(res.status).toBe(200);
+            });
+            return [2 /*return*/];
+        });
+    }); });
+});
