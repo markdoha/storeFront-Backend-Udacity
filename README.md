@@ -19,6 +19,28 @@ SAULT_SHOTS=10
 
 TOKEN=##
 ```
+## the database.json should be good to go but you can edit it if you want
+```
+{
+    "dev": {
+      "driver": "pg",
+      "host": {"ENV": "db_host"},
+      "database": {"ENV": "db_name"},
+      "port": {"ENV": "port"},
+      "user": {"ENV": "db_user"},
+      "password": {"ENV": "db_password"}
+    },
+    "test": {
+      "driver": "pg",
+      "host": {"ENV": "db_host"},
+      "database": {"ENV": "db_test"},
+      "port": {"ENV": "port"},
+      "user": {"ENV": "db_user"},
+      "password": {"ENV": "db_password"}
+    }
+  }
+  
+```
 
 
 ## Set up
