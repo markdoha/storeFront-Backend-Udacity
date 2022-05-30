@@ -48,31 +48,25 @@ var request2 = (0, supertest_1.default)(products_routes_1.default);
 var request3 = (0, supertest_1.default)(orders_routes_1.default);
 var SECRET = process.env.TOKEN_SECRET;
 describe("User Handler", function () {
-    var userdata = {
-        firstname: "John",
-        lastname: "Doe",
-        password: "12345"
-    };
     var token;
-    it("create a user", function () { return __awaiter(void 0, void 0, void 0, function () {
-        return __generator(this, function (_a) {
-            switch (_a.label) {
-                case 0: return [4 /*yield*/, request.post("/create_user").send({
-                        firstname: userdata.firstname,
-                        lastname: userdata.lastname,
-                        password: userdata.password
-                    }).then(function (res) {
-                        expect(res.status).toBe(200);
-                    })];
-                case 1:
-                    _a.sent();
-                    return [2 /*return*/];
-            }
+    it("create a user", function (done) {
+        request
+            .post("/create_user")
+            .send({
+            firstname: "test",
+            lastname: "test",
+            password: "test"
+        })
+            .then(function (res) {
+            var body = res.body, status = res.status;
+            token = body;
+            expect(status).toBe(200);
+            done();
         });
-    }); });
+    });
     it("show a user", function () { return __awaiter(void 0, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            request.get("/show_user/1").then(function (res) {
+            request.get("/show_user/2").then(function (res) {
                 expect(res.status).toBe(200);
             });
             return [2 /*return*/];

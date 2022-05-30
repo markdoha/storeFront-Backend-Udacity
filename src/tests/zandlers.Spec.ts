@@ -1,41 +1,41 @@
 import supertest from "supertest"
 import jwt, {Secret} from "jsonwebtoken"
-import { user } from "../models/user";
-
+import { user, UserInfo } from "../models/user";
+import app from "../server"; 
 import userRoute from "../handlers/user.routes"
 import productRoute from "../handlers/products.routes"
 import orderRoute from "../handlers/orders.routes"
 import { auth } from "../middlewares/auth";
+
 
 const request = supertest(userRoute);
 const request2 = supertest(productRoute);
 const request3 = supertest(orderRoute);
 const SECRET = process.env.TOKEN_SECRET as Secret
 
+
 describe("User Handler", () => {
-    const userdata :user ={
-        firstname: "John",
-        lastname: "Doe",
-        password: "12345"
-    }
+   
     let token :string;
-    it("create a user", async () => {
-       await request.post("/create_user").send(
-           {
-                firstname: userdata.firstname,
-                lastname: userdata.lastname,
-                password: userdata.password
-           }
-       ).then((res) => {
-            
-            expect(res.status).toBe(200)
-            
-        })
+    it("create a user",  (done) => {
+        request
+    .post("/create_user")
+    .send({
+        firstname: "test",
+        lastname: "test",
+        password: "test"
+    })
+    .then((res) => {
+      const {body, status} = res
+      token = body
+      expect(status).toBe(200)
+      done()
+    })
 
     })
 
     it("show a user", async () => {
-        request.get("/show_user/1").then((res) => {
+        request.get("/show_user/2").then((res) => {
             expect(res.status).toBe(200);
         })
     })

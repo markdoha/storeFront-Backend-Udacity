@@ -23,3 +23,4 @@ app.use(orders_routes_1.default);
 app.listen(3000, function () {
     console.log("server is running on port ".concat(port));
 });
+exports.default = app;
