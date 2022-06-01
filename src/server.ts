@@ -1,7 +1,7 @@
 import express from "express";
 import bodyParser from "body-parser";
 import cors from 'cors';
-import catRoute from "./handlers/user.routes";
+import userRoute from "./handlers/user.routes";
 import productRoute from "./handlers/products.routes"
 import orderRoute from "./handlers/orders.routes"
 
@@ -16,9 +16,9 @@ const app: express.Application = express();
 app.use(cors(corsOptions))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(catRoute);
-app.use(productRoute);
-app.use(orderRoute)
+userRoute(app);
+productRoute(app);
+orderRoute(app);
 
 
 app.listen(3000, ()=>{

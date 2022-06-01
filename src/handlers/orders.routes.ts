@@ -8,7 +8,8 @@ import { auth } from "../middlewares/auth";
 dotenv.config();
 
 const o = new orderInfo();
-let app = express.Router();
+
+export default function orderRouter (app: express.Application) {
 
 app.get("/orders", auth, async (req: Request, res: Response) => {
   try {
@@ -69,4 +70,4 @@ app.get("/allOrders", auth, async (req: Request, res: Response) => {
   }
 });
 
-export default app;
+}

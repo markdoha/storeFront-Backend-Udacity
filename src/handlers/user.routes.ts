@@ -6,11 +6,12 @@ import { UserInfo, user } from "../models/user";
 import { NextFunction } from "migrate";
 import { auth } from "../middlewares/auth";
 
+
 dotenv.config();
 
 const u = new UserInfo();
-let app = express.Router();
 
+export default function userRouter (app: express.Application) {
 app.get("/users", auth, async (req: Request, res: Response) => {
   try {
     let data = await u.Index();
@@ -47,5 +48,5 @@ app.get("/show_user/:id", auth, async (req: Request, res: Response) => {
     res.end(`user not found ${err}`);
   }
 });
+}
 
-export default app;

@@ -8,7 +8,8 @@ import { auth } from "../middlewares/auth";
 dotenv.config();
 
 const p = new ProductsInfo();
-let app = express.Router();
+
+export default function productRouter (app: express.Application) {
 
 app.get("/products", async (req: Request, res: Response) => {
   try {
@@ -43,4 +44,4 @@ app.get("/show_product/:id", async (req: Request, res: Response) => {
   }
 });
 
-export default app;
+}

@@ -8,15 +8,14 @@ import orderRoute from "../handlers/orders.routes"
 import { auth } from "../middlewares/auth";
 
 
-const request = supertest(userRoute);
-const request2 = supertest(productRoute);
-const request3 = supertest(orderRoute);
+const request = supertest(app);
+
 const SECRET = process.env.TOKEN_SECRET as Secret
 
+let token : string;
 
-describe("User Handler", () => {
-   
-    let token :string;
+describe("User", () => {
+
     it("create a user",  (done) => {
         request
     .post("/create_user")
@@ -25,87 +24,113 @@ describe("User Handler", () => {
         lastname: "test",
         password: "test"
     })
-    .then((res) => {
+    .then((res: any) => {
       const {body, status} = res
       token = body
-      expect(status).toBe(200)
-      done()
+      expect(token).toBeDefined()
+      done();
     })
 
     })
 
-    it("show a user", async () => {
-        request.get("/show_user/2").then((res) => {
+    it("show a user",  (done) => {
+        request.get("/show_user/2")
+        .set("Authorization", "bearer " + token)
+        .then((res) => {
             expect(res.status).toBe(200);
         })
+        done();
     })
 
-    it("show all users", async () => {
-        request.get("/users").then((res) => {
+    it("show all users", (done) => {
+        request.get("/users")
+        .set("Authorization", "bearer " + token)
+        .then((res) => {
             expect(res.status).toBe(200);
         })
+        done();
     })
-
 })
 
 
 
-describe("Products Handler", () => {
-    it("create a product", async () => {
-        request2.post("/create_product").send({
+    console.log("porduct handeler");
+    
+    it("create a product",  (dpne) => {
+        request.post("/create_product")
+        .set("Authorization", "bearer " + token)
+        .send({
             name: "test",
             price: 123
         }).then((res) => {
         expect(res.status).toBe(200);
         })
-
+        dpne();
     })
 
-    it("show a product", async () => {
-        request2.get("/show_product/1").then((res) => {
+    it("show a product",  (done) => {
+        request.get("/show_product/1")
+        .set("Authorization", "bearer " + token)
+        .then((res) => {
             expect(res.status).toBe(200);
         })
+        done();
+        
     })
 
-    it("show all products", async () => {
-        request2.get("/products").then((res) => {
+    it("show all products",  (done) => {
+        request.get("/products")
+        .set("Authorization", "bearer " + token)
+        .then((res) => {
             expect(res.status).toBe(200);
         })
+        done();
     })
 
-})
+
 
 
 describe("orders Handler", () => {
-    it("create order", async () => {
-        request3.post("/create_order").send({
+    it("create order",  (done) => {
+        request.post("/create_order")
+        .set("Authorization", "bearer " + token)
+        .send({
             user_id: 1,
             status: true
         }).then((res) => {
         expect(res.status).toBe(200);
         })
-
+        done();
     })
 
-    it("shows current order", async () => {
-        request3.get("/current_order/1").then((res) => {
+    it("shows current order",  (done) => {
+        request.get("/current_order/1")
+        .set("Authorization", "bearer " + token)
+        .then((res) => {
+            expect(res.status).toBe(404);
+        })
+        done();
+    })
+
+    it("show all orders",  (done) => {
+        request.get("/orders")
+        .set("Authorization", "bearer " + token)
+        .then((res) => {
             expect(res.status).toBe(200);
         })
+        done();
     })
 
-    it("show all orders", async () => {
-        request3.get("/orders").then((res) => {
-            expect(res.status).toBe(200);
-        })
-    })
-
-    it("add product", async () => {
-        request3.post("/addProcuct/1").send({
+    it("add product",  (done) => {
+        request.post("/addProcuct/1")
+        .set("Authorization", "bearer " + token)
+        .send({
             product_id: 1,
             quantity: 2
         }).then((res) => {
         expect(res.status).toBe(200);
         })
+        done();
     })
 
 })

@@ -1,7 +1,14 @@
 # Storefront Backend Project
 
 ## creating the database
- - create a database named 
+ - create a database and name it `shopping` for the dev via the sql `CREATE DATABASE shopping;`
+ - create a database and name it `shopping_test` for the testing `CREATE DATABASE shopping_test`
+
+## create user
+- create user and name him `shopping_user` you want but don't forget to put it in the .env file via the sql `CREATE USER shopping_user WITH PASSWORD 'password123' `
+
+- grant all access to that user via the sql `GRANT ALL PRIVILEGES ON DATABASE shopping TO shopping_user `
+- grant all access to that user via the sql `GRANT ALL PRIVILEGES ON DATABASE shopping_test TO shopping_user `
 
 ## create a .env file and copy and paste all with changing the `##`
 ```
@@ -10,8 +17,8 @@ ENV=dev
 db_host=localhost
 db_name=shopping
 db_test=shopping_test
-db_user=##
-db_password=##
+db_user=shopping_user
+db_password=password123
 
 BCRYPT_PASSWORD=##
 
